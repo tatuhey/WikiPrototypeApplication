@@ -26,6 +26,8 @@ namespace WikiPrototypeApplication
         {
             Add();
             DisplayList();
+            Clear_Textboxes();
+            BubbleSort();
         }
 
         private void Add()
@@ -53,15 +55,49 @@ namespace WikiPrototypeApplication
             }
 
         }
-
-        private void Edit()
+        private void Clear_Textboxes()
         {
+            textName.Clear();
+            textCategory.Clear();
+            textStructure.Clear();
+            textDefinition.Clear();
+        }
 
+
+        // Not working atm
+        private void BubbleSort()
+        {
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < row - 1; j++)
+                {
+                    if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
+                    {
+                        if (!(string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1))
+                        {
+                            Swap(j);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        // not working atm
+        private void Swap(int indx)
+        {
+            string temp;
+            for (int i = 0; i < column; i++)
+            {
+                temp = wikiEntry[indx, i ];
+                wikiEntry[indx, i] = wikiEntry[indx + 1, i];
+                wikiEntry[indx + 1, i] = temp;
+            }
         }
        
         private void DisplayList()
         {
-            listView.Items.Clear();
+            dataListView.Items.Clear();
             for (int x = 0; x < row; x++)
             {
                ListViewItem wikiData = new ListViewItem(wikiEntry[x, 0]);
@@ -69,7 +105,7 @@ namespace WikiPrototypeApplication
                 wikiData.SubItems.Add(wikiEntry[x, 2]);
                 wikiData.SubItems.Add(wikiEntry[x, 3]);
 
-                listView.Items.Add(wikiData);   
+                dataListView.Items.Add(wikiData);   
 
             }
         }

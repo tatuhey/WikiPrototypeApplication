@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView = new System.Windows.Forms.ListView();
+            this.dataListView = new System.Windows.Forms.ListView();
             this.dataName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dataCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dataStructure = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,20 +55,20 @@
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView
+            // dataListView
             // 
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.dataName,
             this.dataCategory,
             this.dataStructure,
             this.dataDefinition});
-            this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(447, 75);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(341, 301);
-            this.listView.TabIndex = 0;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
+            this.dataListView.HideSelection = false;
+            this.dataListView.Location = new System.Drawing.Point(447, 75);
+            this.dataListView.Name = "dataListView";
+            this.dataListView.Size = new System.Drawing.Size(341, 301);
+            this.dataListView.TabIndex = 0;
+            this.dataListView.UseCompatibleStateImageBehavior = false;
+            this.dataListView.View = System.Windows.Forms.View.Details;
             // 
             // dataName
             // 
@@ -280,7 +280,7 @@
             this.Controls.Add(this.textStructure);
             this.Controls.Add(this.textCategory);
             this.Controls.Add(this.textName);
-            this.Controls.Add(this.listView);
+            this.Controls.Add(this.dataListView);
             this.Name = "WikiApplication";
             this.Text = "Wiki Application";
             this.statusStrip.ResumeLayout(false);
@@ -292,7 +292,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ListView dataListView;
         private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.TextBox textCategory;
         private System.Windows.Forms.TextBox textStructure;
