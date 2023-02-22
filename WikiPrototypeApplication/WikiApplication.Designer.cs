@@ -48,6 +48,9 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textSearch = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +62,7 @@
             this.dataStructure,
             this.dataDefinition});
             this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(447, 66);
+            this.listView.Location = new System.Drawing.Point(447, 75);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(341, 301);
             this.listView.TabIndex = 0;
@@ -85,28 +88,28 @@
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(12, 66);
+            this.textName.Location = new System.Drawing.Point(12, 75);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(348, 20);
             this.textName.TabIndex = 1;
             // 
             // textCategory
             // 
-            this.textCategory.Location = new System.Drawing.Point(12, 117);
+            this.textCategory.Location = new System.Drawing.Point(12, 126);
             this.textCategory.Name = "textCategory";
             this.textCategory.Size = new System.Drawing.Size(348, 20);
             this.textCategory.TabIndex = 2;
             // 
             // textStructure
             // 
-            this.textStructure.Location = new System.Drawing.Point(12, 168);
+            this.textStructure.Location = new System.Drawing.Point(12, 177);
             this.textStructure.Name = "textStructure";
             this.textStructure.Size = new System.Drawing.Size(348, 20);
             this.textStructure.TabIndex = 3;
             // 
             // textDefinition
             // 
-            this.textDefinition.Location = new System.Drawing.Point(12, 219);
+            this.textDefinition.Location = new System.Drawing.Point(12, 228);
             this.textDefinition.Multiline = true;
             this.textDefinition.Name = "textDefinition";
             this.textDefinition.Size = new System.Drawing.Size(348, 148);
@@ -116,7 +119,7 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelName.Location = new System.Drawing.Point(12, 38);
+            this.labelName.Location = new System.Drawing.Point(12, 47);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(64, 25);
             this.labelName.TabIndex = 5;
@@ -126,7 +129,7 @@
             // 
             this.labelCategory.AutoSize = true;
             this.labelCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCategory.Location = new System.Drawing.Point(12, 89);
+            this.labelCategory.Location = new System.Drawing.Point(12, 98);
             this.labelCategory.Name = "labelCategory";
             this.labelCategory.Size = new System.Drawing.Size(92, 25);
             this.labelCategory.TabIndex = 6;
@@ -136,7 +139,7 @@
             // 
             this.labelStructure.AutoSize = true;
             this.labelStructure.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStructure.Location = new System.Drawing.Point(12, 140);
+            this.labelStructure.Location = new System.Drawing.Point(12, 149);
             this.labelStructure.Name = "labelStructure";
             this.labelStructure.Size = new System.Drawing.Size(91, 25);
             this.labelStructure.TabIndex = 7;
@@ -146,7 +149,7 @@
             // 
             this.labelDefinition.AutoSize = true;
             this.labelDefinition.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDefinition.Location = new System.Drawing.Point(12, 191);
+            this.labelDefinition.Location = new System.Drawing.Point(12, 200);
             this.labelDefinition.Name = "labelDefinition";
             this.labelDefinition.Size = new System.Drawing.Size(92, 25);
             this.labelDefinition.TabIndex = 8;
@@ -154,7 +157,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(366, 66);
+            this.buttonAdd.Location = new System.Drawing.Point(366, 75);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
@@ -164,7 +167,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(366, 117);
+            this.buttonEdit.Location = new System.Drawing.Point(366, 126);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonEdit.TabIndex = 10;
@@ -173,7 +176,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(366, 168);
+            this.buttonDelete.Location = new System.Drawing.Point(366, 177);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 11;
@@ -184,7 +187,7 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip.Location = new System.Drawing.Point(0, 402);
+            this.statusStrip.Location = new System.Drawing.Point(0, 385);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.TabIndex = 12;
@@ -198,7 +201,7 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(366, 315);
+            this.buttonLoad.Location = new System.Drawing.Point(12, 20);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(75, 23);
             this.buttonLoad.TabIndex = 13;
@@ -207,18 +210,46 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(366, 344);
+            this.buttonSave.Location = new System.Drawing.Point(93, 20);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 14;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(447, 44);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(75, 23);
+            this.buttonSort.TabIndex = 15;
+            this.buttonSort.Text = "Sort";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(713, 45);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 16;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            // 
+            // textSearch
+            // 
+            this.textSearch.Location = new System.Drawing.Point(528, 47);
+            this.textSearch.Name = "textSearch";
+            this.textSearch.Size = new System.Drawing.Size(179, 20);
+            this.textSearch.TabIndex = 17;
+            // 
             // WikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 424);
+            this.ClientSize = new System.Drawing.Size(800, 407);
+            this.Controls.Add(this.textSearch);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.statusStrip);
@@ -265,6 +296,9 @@
         private System.Windows.Forms.ColumnHeader dataStructure;
         private System.Windows.Forms.ColumnHeader dataDefinition;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox textSearch;
     }
 }
 
