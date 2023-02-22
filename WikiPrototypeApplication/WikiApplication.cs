@@ -53,6 +53,11 @@ namespace WikiPrototypeApplication
             }
 
         }
+
+        private void Edit()
+        {
+
+        }
        
         private void DisplayList()
         {
@@ -69,6 +74,14 @@ namespace WikiPrototypeApplication
             }
         }
 
+        private void textSearch_Click(object sender, EventArgs e)
+        {
+            textSearch.Clear();
+        }
 
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
