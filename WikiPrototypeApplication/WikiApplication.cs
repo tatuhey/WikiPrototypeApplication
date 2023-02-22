@@ -57,11 +57,15 @@ namespace WikiPrototypeApplication
         private void DisplayList()
         {
             listView.Items.Clear();
-            string rec = "";
             for (int x = 0; x < row; x++)
             {
-                rec = wikiEntry[x, 0] + "\n" + wikiEntry[x, 1] + "\n" + wikiEntry[x, 2] + "\n" + wikiEntry[x, 3];
-                listView.Items.Add(rec);
+               ListViewItem wikiData = new ListViewItem(wikiEntry[x, 0]);
+                wikiData.SubItems.Add(wikiEntry[x,1]);
+                wikiData.SubItems.Add(wikiEntry[x, 2]);
+                wikiData.SubItems.Add(wikiEntry[x, 3]);
+
+                listView.Items.Add(wikiData);   
+
             }
         }
 
