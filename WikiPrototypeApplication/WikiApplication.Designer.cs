@@ -45,7 +45,7 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ststripWiki = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
@@ -188,18 +188,18 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.ststripWiki});
             this.statusStrip.Location = new System.Drawing.Point(0, 385);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip";
             // 
-            // toolStripStatusLabel1
+            // ststripWiki
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(112, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel";
+            this.ststripWiki.Name = "ststripWiki";
+            this.ststripWiki.Size = new System.Drawing.Size(80, 17);
+            this.ststripWiki.Text = " STATUS STRIP";
             // 
             // buttonLoad
             // 
@@ -227,6 +227,7 @@
             this.buttonSort.TabIndex = 15;
             this.buttonSort.Text = "Sort";
             this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // buttonSearch
             // 
@@ -311,7 +312,7 @@
         private System.Windows.Forms.ColumnHeader dataCategory;
         private System.Windows.Forms.ColumnHeader dataStructure;
         private System.Windows.Forms.ColumnHeader dataDefinition;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel ststripWiki;
         private System.Windows.Forms.Button buttonSort;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textSearch;

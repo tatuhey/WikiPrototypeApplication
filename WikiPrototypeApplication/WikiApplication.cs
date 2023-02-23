@@ -15,6 +15,7 @@ namespace WikiPrototypeApplication
         public WikiApplication()
         {
             InitializeComponent();
+            ststripWiki.Text = "";
         }
 
         static int row = 12;
@@ -28,6 +29,12 @@ namespace WikiPrototypeApplication
             Clear_Textboxes();
             BubbleSort(); 
             DisplayList();
+        }
+
+        private void stStripArrayFull()
+        {
+            ststripWiki.Text = "The array is full";
+            ststripWiki.BackColor = Color.Red;
         }
 
         private void Add()
@@ -51,7 +58,7 @@ namespace WikiPrototypeApplication
             }
             else
             {
-                statusStrip.Show();
+                stStripArrayFull();
             }
 
         }
@@ -110,11 +117,42 @@ namespace WikiPrototypeApplication
         private void textSearch_Click(object sender, EventArgs e)
         {
             textSearch.Clear();
+            int startIndex = -1;
+            int finalIndex = ptr;
+            bool flag = false;
+            int foundIndex = -1;
+
+            while (!flag && !((finalIndex - startIndex) <= 1))
+            {
+                int newIndex = (finalIndex - startIndex) / 2;
+                if (string.Compare(wikiEntry[newIndex, 0], textName.Text) == 0)
+                {
+                    foundIndex = newIndex;
+                    flag = true;
+                    break;
+                }
+                else
+                {
+                    if (string.Compare(wikiEntry[newIndex, 0], textName.Text) == 1)
+                        finalIndex = newIndex;
+                    else
+                        startIndex = newIndex;
+                }
+            }
+            if (flag)
+            {
+
+            }
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            BubbleSort();
         }
     }
 }
