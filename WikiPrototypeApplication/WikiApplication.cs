@@ -25,9 +25,9 @@ namespace WikiPrototypeApplication
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Add();
-            DisplayList();
             Clear_Textboxes();
-            BubbleSort();
+            BubbleSort(); 
+            DisplayList();
         }
 
         private void Add()
@@ -63,8 +63,6 @@ namespace WikiPrototypeApplication
             textDefinition.Clear();
         }
 
-
-        // Not working atm
         private void BubbleSort()
         {
             for (int i = 0; i < row; i++)
@@ -73,7 +71,7 @@ namespace WikiPrototypeApplication
                 {
                     if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
                     {
-                        if (!(string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1))
+                        if (string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1)
                         {
                             Swap(j);
 
@@ -83,7 +81,6 @@ namespace WikiPrototypeApplication
             }
         }
 
-        // not working atm
         private void Swap(int indx)
         {
             string temp;
