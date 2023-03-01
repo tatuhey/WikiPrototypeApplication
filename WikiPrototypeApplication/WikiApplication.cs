@@ -35,7 +35,10 @@ namespace WikiPrototypeApplication
                 textStructure.Text = wikiEntry[selectedlistviewcount, 2];
                 textDefinition.Text = wikiEntry[selectedlistviewcount, 3];
             }
-
+            else
+            {
+                MessageBox.Show("Error when selecting data from List View");
+            }
         }
 
         private void WikiApplication_MouseClick(object sender, MouseEventArgs e)
@@ -204,8 +207,8 @@ namespace WikiPrototypeApplication
 
             while (!flag && !((finalIndex - startIndex) <= 1))
             {
-                int newIndex = (finalIndex - startIndex) / 2;
-                if (string.Compare(wikiEntry[newIndex, 0], textName.Text) == 0)
+                int newIndex = (finalIndex + startIndex) / 2;
+                if (string.Compare(wikiEntry[newIndex, 0], textSearch.Text) == 0)
                 {
                     foundIndex = newIndex;
                     flag = true;
@@ -213,7 +216,7 @@ namespace WikiPrototypeApplication
                 }
                 else
                 {
-                    if (string.Compare(wikiEntry[newIndex, 0], textName.Text) == 1)
+                    if (string.Compare(wikiEntry[newIndex, 0], textSearch.Text) == 1)
                         finalIndex = newIndex;
                     else
                         startIndex = newIndex;
@@ -222,18 +225,16 @@ namespace WikiPrototypeApplication
             if (flag)
             {
                 MessageBox.Show("Found");
-                wikiEntry[foundIndex, 0] = textName.Text;
-                wikiEntry[foundIndex, 1] = textCategory.Text;
-                wikiEntry[foundIndex, 2] = textStructure.Text;
-                wikiEntry[foundIndex, 3] = textDefinition.Text;
+                textName.Text = wikiEntry[foundIndex, 0];
+                textCategory.Text = wikiEntry[foundIndex, 1];
+                textStructure.Text = wikiEntry[foundIndex, 2];
+                textDefinition.Text = wikiEntry[foundIndex, 3];
+            }
+            else
+            {
+                MessageBox.Show("Not found");
             }
         }
-
-        //private void binary_search()
-        //{
-        //    int index = wikiEntry
-        //        }
-
         #endregion
 
         #region Buttons
@@ -248,8 +249,8 @@ namespace WikiPrototypeApplication
         // not finished yet
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            textSearch.Clear();
             Search();
+            textSearch.Clear();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
