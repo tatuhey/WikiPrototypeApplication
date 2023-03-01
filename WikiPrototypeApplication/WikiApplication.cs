@@ -24,10 +24,29 @@ namespace WikiPrototypeApplication
         int selectedlistviewcount = -1;
         string[,] wikiEntry = new string[row, column];
 
+        #region Behaviour
+        private void dataListView_MouseClick(object sender, MouseEventArgs e)
+        {
+            selectedlistviewcount = dataListView.SelectedIndices[0];
+            textName.Text = wikiEntry[selectedlistviewcount, 0];
+            textCategory.Text = wikiEntry[selectedlistviewcount, 1];
+            textStructure.Text = wikiEntry[selectedlistviewcount, 2];
+            textDefinition.Text = wikiEntry[selectedlistviewcount, 3];
+        }
 
-        #region Functions
+        private void WikiApplication_MouseClick(object sender, MouseEventArgs e)
+        {
+            stStripArrayReset();
+        }
+        private void textSearch_Click(object sender, EventArgs e)
+        {
+            textSearch.Clear();
+            textSearch.ForeColor = Color.Black;
 
+        }
+        #endregion
 
+        #region Status Strips
         private void stStripArrayFull()
         {
             ststripWiki.Text = "The array is full";
@@ -40,13 +59,27 @@ namespace WikiPrototypeApplication
             ststripWiki.BackColor = Color.Red;
         }
 
+        private void stStripArrayEdit()
+        {
+            ststripWiki.Text = "Entry was successfully edited";
+            ststripWiki.BackColor = Color.YellowGreen;
+        }
+        
+        private void stStripArrayDelete()
+        {
+            ststripWiki.Text = "Entry was successfully deleted";
+            ststripWiki.BackColor = Color.Tomato;
+        }
+
         private void stStripArrayReset()
         {
             ststripWiki.Text = string.Empty;
             ststripWiki.BackColor = Color.Empty;
 
         }
-        
+        #endregion
+
+        #region Methods
         private void Add()
         {
             if (!(string.IsNullOrEmpty(textName.Text)))
@@ -85,6 +118,14 @@ namespace WikiPrototypeApplication
             wikiEntry[selectedlistviewcount, 3] = textDefinition.Text;
         }
 
+        private void Delete()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                wikiEntry[selectedlistviewcount, i] = string.Empty;
+            }
+        }
+
         private void Clear_Textboxes()
         {
             textName.Clear();
@@ -99,14 +140,18 @@ namespace WikiPrototypeApplication
             {
                 for (int j = 0; j < row - 1; j++)
                 {
-                    if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
+                    if (String.CompareOrdinal(wikiEntry[j, 0], wikiEntry[j + 1, 0]) > 0)
                     {
-                        if (string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1)
-                        {
-                            Swap(j);
-
-                        }
+                        Swap(j);
                     }
+                    //if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
+                    //{
+                    //    if (string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1)
+                    //    {
+                    //        Swap(j);
+
+                    //    }
+                    //}
                 }
             }
         }
@@ -139,32 +184,15 @@ namespace WikiPrototypeApplication
             }
         }
 
-        #endregion
-
-        private void dataListView_MouseClick(object sender, MouseEventArgs e)
+        private void ButtonsRoutine()
         {
-            selectedlistviewcount = dataListView.SelectedIndices[0];
-            textName.Text = wikiEntry[selectedlistviewcount, 0];
-            textCategory.Text = wikiEntry[selectedlistviewcount, 1];
-            textStructure.Text = wikiEntry[selectedlistviewcount, 2];
-            textDefinition.Text = wikiEntry[selectedlistviewcount, 3];            
-        }
-
-        #region Buttons
-
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            Add();
             Clear_Textboxes();
             BubbleSort();
             DisplayList();
-            textName.Focus();
         }
 
-        // not finished yet
-        private void textSearch_Click(object sender, EventArgs e)
+        private void Search()
         {
-            textSearch.Clear();
             int startIndex = -1;
             int finalIndex = ptr;
             bool flag = false;
@@ -189,8 +217,35 @@ namespace WikiPrototypeApplication
             }
             if (flag)
             {
-
+                MessageBox.Show("Found");
+                wikiEntry[foundIndex, 0] = textName.Text;
+                wikiEntry[foundIndex, 1] = textCategory.Text;
+                wikiEntry[foundIndex, 2] = textStructure.Text;
+                wikiEntry[foundIndex, 3] = textDefinition.Text;
             }
+        }
+
+        //private void binary_search()
+        //{
+        //    int index = wikiEntry
+        //        }
+
+        #endregion
+
+        #region Buttons
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            Add();
+            ButtonsRoutine();
+            textName.Focus();
+        }
+
+        // not finished yet
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            textSearch.Clear();
+            Search();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -198,14 +253,35 @@ namespace WikiPrototypeApplication
             if (selectedlistviewcount > -1)
             {
                 Edit();
-                Clear_Textboxes();
-                BubbleSort();
-                DisplayList();
+                ButtonsRoutine();
                 selectedlistviewcount = -1;
+                stStripArrayEdit();
+
             }
             else
             {
                 stStripArrayEmpty();
+            }
+        }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (selectedlistviewcount > -1)
+            {
+                DialogResult result = MessageBox.Show("Do you want to delete the selected entry?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    Delete();
+                    ButtonsRoutine();
+                    ptr--;
+                    selectedlistviewcount = -1;
+                    stStripArrayDelete();
+                }
+                else
+                {
+                    ButtonsRoutine();
+                    selectedlistviewcount = -1;
+                }
+
             }
         }
 
@@ -213,18 +289,7 @@ namespace WikiPrototypeApplication
         {
             BubbleSort();
         }
-
-
         #endregion
 
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void WikiApplication_MouseClick(object sender, MouseEventArgs e)
-        {
-            stStripArrayReset();
-        }
     }
 }
