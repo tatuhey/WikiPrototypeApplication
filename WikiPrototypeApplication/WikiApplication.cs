@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -246,7 +247,6 @@ namespace WikiPrototypeApplication
             textName.Focus();
         }
 
-        // not finished yet
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             Search();
@@ -296,5 +296,70 @@ namespace WikiPrototypeApplication
         }
         #endregion
 
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            BinaryReader br;
+            int x = 0;
+            dataListView.Items.Clear();
+            try
+            {
+                br = new BinaryReader(new FileStream("definitions.dat", FileMode.Open));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n Cannot open file for reading");
+                return;
+            }
+            while (br.BaseStream.Position != br.BaseStream.Length)
+            {
+                try
+                {
+                    wikiEntry[x, 0] = br.ReadString();
+                    wikiEntry[x, 1] = br.ReadString();
+                    wikiEntry[x, 2] = br.ReadString();
+                    wikiEntry[x, 3] = br.ReadString();
+                    x++;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Cannot read data from file or EOF" + ex);
+                    break;
+                }
+                ptr = x;
+                DisplayList();
+            }
+            br.Close();
+
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            BinaryWriter bw;
+            try
+            {
+                bw = new BinaryWriter(new FileStream("definitions.dat", FileMode.Create));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n Cannot append to file.");
+                return;
+            }
+            try
+            {
+                for (int i = 0; i < ptr; i++)
+                {
+                    bw.Write(wikiEntry[i, 0]);
+                    bw.Write(wikiEntry[i, 1]);
+                    bw.Write(wikiEntry[i, 2]);
+                    bw.Write(wikiEntry[i, 3]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n Cannot write data to file.");
+                return;
+            }
+            bw.Close();
+        }
     }
 }
