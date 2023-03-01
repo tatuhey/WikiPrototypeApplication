@@ -69,6 +69,7 @@
             this.dataListView.TabIndex = 0;
             this.dataListView.UseCompatibleStateImageBehavior = false;
             this.dataListView.View = System.Windows.Forms.View.Details;
+            this.dataListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataListView_MouseClick);
             // 
             // dataName
             // 
@@ -184,6 +185,7 @@
             this.buttonDelete.TabIndex = 11;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // statusStrip
             // 
@@ -284,6 +286,7 @@
             this.Controls.Add(this.dataListView);
             this.Name = "WikiApplication";
             this.Text = "Wiki Application";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.WikiApplication_MouseClick);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
