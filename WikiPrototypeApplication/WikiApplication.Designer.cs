@@ -52,6 +52,8 @@
             this.buttonSearch = new System.Windows.Forms.Button();
             this.textSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.svFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.opFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -263,6 +265,10 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Wiki Application";
             // 
+            // opFileDialog
+            // 
+            this.opFileDialog.FileName = "openFileDialog1";
+            // 
             // WikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +329,8 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textSearch;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.SaveFileDialog svFileDialog;
+        private System.Windows.Forms.OpenFileDialog opFileDialog;
     }
 }
 

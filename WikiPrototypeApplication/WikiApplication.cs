@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -245,12 +248,14 @@ namespace WikiPrototypeApplication
             Add();
             ButtonsRoutine();
             textName.Focus();
+            stStripArrayReset();
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             Search();
             textSearch.Clear();
+            stStripArrayReset();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -293,73 +298,89 @@ namespace WikiPrototypeApplication
         private void buttonSort_Click(object sender, EventArgs e)
         {
             BubbleSort();
+            stStripArrayReset();
         }
         #endregion
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            BinaryReader br;
-            int x = 0;
-            dataListView.Items.Clear();
-            try
+            string defaultDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            opFileDialog.InitialDirectory = defaultDirectory;
+            opFileDialog.FileName = "definitions.dat";
+            if (opFileDialog.ShowDialog() == DialogResult.OK)
             {
-                br = new BinaryReader(new FileStream("definitions.dat", FileMode.Open));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n Cannot open file for reading");
-                return;
-            }
-            while (br.BaseStream.Position != br.BaseStream.Length)
-            {
+                BinaryReader br;
+                int x = 0;
+                dataListView.Items.Clear();
                 try
                 {
-                    wikiEntry[x, 0] = br.ReadString();
-                    wikiEntry[x, 1] = br.ReadString();
-                    wikiEntry[x, 2] = br.ReadString();
-                    wikiEntry[x, 3] = br.ReadString();
-                    x++;
+                    br = new BinaryReader(new FileStream(opFileDialog.FileName, FileMode.Open));
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Cannot read data from file or EOF" + ex);
-                    break;
+                    MessageBox.Show(ex.Message + "\nCannot open file for reading");
+                    return;
                 }
+                while (br.BaseStream.Position != br.BaseStream.Length)
+                {
+                    try
+                    {
+                        wikiEntry[x, 0] = br.ReadString();
+                        wikiEntry[x, 1] = br.ReadString();
+                        wikiEntry[x, 2] = br.ReadString();
+                        wikiEntry[x, 3] = br.ReadString();
+                        x++;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cannot read data from file or EOF" + ex);
+                        break;
+                    }
+                }
+                br.Close();
                 ptr = x;
                 DisplayList();
             }
-            br.Close();
 
+            stStripArrayReset();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            BinaryWriter bw;
-            try
+            string defaultDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            svFileDialog.InitialDirectory = defaultDirectory;
+            svFileDialog.FileName = "definitions.dat";
+            if (svFileDialog.ShowDialog() == DialogResult.OK)
             {
-                bw = new BinaryWriter(new FileStream("definitions.dat", FileMode.Create));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n Cannot append to file.");
-                return;
-            }
-            try
-            {
-                for (int i = 0; i < ptr; i++)
+                BinaryWriter bw;
+                try
                 {
-                    bw.Write(wikiEntry[i, 0]);
-                    bw.Write(wikiEntry[i, 1]);
-                    bw.Write(wikiEntry[i, 2]);
-                    bw.Write(wikiEntry[i, 3]);
+                    bw = new BinaryWriter(new FileStream("definitions.dat", FileMode.Create));
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n Cannot append to file.");
+                    return;
+                }
+                try
+                {
+                    for (int i = 0; i < ptr; i++)
+                    {
+                        bw.Write(wikiEntry[i, 0]);
+                        bw.Write(wikiEntry[i, 1]);
+                        bw.Write(wikiEntry[i, 2]);
+                        bw.Write(wikiEntry[i, 3]);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n Cannot write data to file.");
+                    return;
+                }
+                bw.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n Cannot write data to file.");
-                return;
-            }
-            bw.Close();
+            stStripArrayReset();
+
         }
     }
 }
