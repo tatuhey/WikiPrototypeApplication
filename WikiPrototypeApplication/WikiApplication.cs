@@ -27,11 +27,15 @@ namespace WikiPrototypeApplication
         #region Behaviour
         private void dataListView_MouseClick(object sender, MouseEventArgs e)
         {
-            selectedlistviewcount = dataListView.SelectedIndices[0];
-            textName.Text = wikiEntry[selectedlistviewcount, 0];
-            textCategory.Text = wikiEntry[selectedlistviewcount, 1];
-            textStructure.Text = wikiEntry[selectedlistviewcount, 2];
-            textDefinition.Text = wikiEntry[selectedlistviewcount, 3];
+            if (dataListView.SelectedIndices.Count > -1)
+            {
+                selectedlistviewcount = dataListView.SelectedIndices[0];
+                textName.Text = wikiEntry[selectedlistviewcount, 0];
+                textCategory.Text = wikiEntry[selectedlistviewcount, 1];
+                textStructure.Text = wikiEntry[selectedlistviewcount, 2];
+                textDefinition.Text = wikiEntry[selectedlistviewcount, 3];
+            }
+
         }
 
         private void WikiApplication_MouseClick(object sender, MouseEventArgs e)
@@ -120,7 +124,7 @@ namespace WikiPrototypeApplication
 
         private void Delete()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < dataListView.Columns.Count; i++)
             {
                 wikiEntry[selectedlistviewcount, i] = string.Empty;
             }
@@ -140,18 +144,18 @@ namespace WikiPrototypeApplication
             {
                 for (int j = 0; j < row - 1; j++)
                 {
-                    if (String.CompareOrdinal(wikiEntry[j, 0], wikiEntry[j + 1, 0]) > 0)
-                    {
-                        Swap(j);
-                    }
-                    //if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
+                    //if (String.CompareOrdinal(wikiEntry[j, 0], wikiEntry[j + 1, 0]) > 0)
                     //{
-                    //    if (string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1)
-                    //    {
-                    //        Swap(j);
-
-                    //    }
+                    //    Swap(j);
                     //}
+                    if (!(string.IsNullOrEmpty(wikiEntry[j + 1, 0])))
+                    {
+                        if (string.Compare(wikiEntry[j, 0], wikiEntry[j + 1, 0]) == 1)
+                        {
+                            Swap(j);
+
+                        }
+                    }
                 }
             }
         }
