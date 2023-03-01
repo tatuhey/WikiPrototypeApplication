@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WikiPrototypeApplication
@@ -75,7 +67,7 @@ namespace WikiPrototypeApplication
             ststripWiki.Text = "Entry was successfully edited";
             ststripWiki.BackColor = Color.YellowGreen;
         }
-        
+
         private void stStripArrayDelete()
         {
             ststripWiki.Text = "Entry was successfully deleted";
@@ -118,8 +110,8 @@ namespace WikiPrototypeApplication
             }
             else
             {
-               stStripArrayEmpty();
-            }        
+                stStripArrayEmpty();
+            }
         }
         private void Edit()
         {
@@ -177,21 +169,21 @@ namespace WikiPrototypeApplication
                 wikiEntry[indx + 1, i] = temp;
             }
         }
-       
+
         private void DisplayList()
         {
             dataListView.Items.Clear();
             for (int i = 0; i < row; i++)
             {
                 if (wikiEntry[i, 0] != "~" && wikiEntry[i, 0] != null)
-                    {
-                        ListViewItem wikiData = new ListViewItem(wikiEntry[i, 0]);
-                        wikiData.SubItems.Add(wikiEntry[i, 1]);
-                        wikiData.SubItems.Add(wikiEntry[i, 2]);
-                        wikiData.SubItems.Add(wikiEntry[i, 3]);
+                {
+                    ListViewItem wikiData = new ListViewItem(wikiEntry[i, 0]);
+                    wikiData.SubItems.Add(wikiEntry[i, 1]);
+                    wikiData.SubItems.Add(wikiEntry[i, 2]);
+                    wikiData.SubItems.Add(wikiEntry[i, 3]);
 
-                        dataListView.Items.Add(wikiData);
-                    }
+                    dataListView.Items.Add(wikiData);
+                }
             }
         }
 
@@ -300,7 +292,7 @@ namespace WikiPrototypeApplication
             BubbleSort();
             stStripArrayReset();
         }
-        #endregion
+        
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
@@ -380,7 +372,8 @@ namespace WikiPrototypeApplication
                 bw.Close();
             }
             stStripArrayReset();
-
+                       
         }
+        #endregion
     }
 }
