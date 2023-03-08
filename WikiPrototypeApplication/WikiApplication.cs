@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -28,7 +27,7 @@ namespace WikiPrototypeApplication
         int selectedlistviewcount = -1;
         string[,] wikiEntry = new string[row, column];
 
-        
+
         #region Behaviour - Everything besides buttons are clicked
         private void dataListView_MouseClick(object sender, MouseEventArgs e)
         {
