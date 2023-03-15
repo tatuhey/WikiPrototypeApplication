@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 
 // RAIHAN KHALIL ABDILLAH 30065696
-// WIKI APPLICATION | February 1st 2023
+// WIKI APPLICATION | February 1st 2023 - March 15th 2023
 // Small wiki for different types of data structures
 
 namespace WikiPrototypeApplication
@@ -19,6 +19,7 @@ namespace WikiPrototypeApplication
         }
 
         // Using static for the size of the array
+        // 9.1	Create a global 2D string array, use static variables for the dimensions (row = 4, column = 12)
         static int row = 12;
         static int column = 4;
         // pointer is global, and set to 0
@@ -28,6 +29,8 @@ namespace WikiPrototypeApplication
         string[,] wikiEntry = new string[row, column];
 
         #region Behaviour - Everything besides buttons are clicked
+
+        // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes
         private void dataListView_MouseClick(object sender, MouseEventArgs e)
         {
             stStripArrayReset();
@@ -46,7 +49,6 @@ namespace WikiPrototypeApplication
             }
         }
 
-
         private void WikiApplication_MouseClick(object sender, MouseEventArgs e)
         {
             // clicking on the form reset the status strip, listview count, and clear selection from list view
@@ -54,6 +56,7 @@ namespace WikiPrototypeApplication
             selectedlistviewcount = -1;
             dataListView.SelectedItems.Clear();
         }
+
         private void textSearch_Click(object sender, EventArgs e)
         {
             // remove gray text from the search textbox
@@ -160,6 +163,7 @@ namespace WikiPrototypeApplication
             }
         }
 
+        // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added
         private void Clear_Textboxes()
         {
             // clear all textboxes
@@ -169,6 +173,7 @@ namespace WikiPrototypeApplication
             textDefinition.Clear();
         }
 
+        // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending, ensure you use a separate swap method that passes the array element to be swapped (do not use any built-in array methods
         private void BubbleSort()
         {
             // bubble sort with compare ordinal
@@ -197,6 +202,7 @@ namespace WikiPrototypeApplication
             }
         }
 
+        // 9.8	Create a display method that will show the following information in a ListView: Name and Category
         private void DisplayList()
         {
             // unselect the entry on the list view
@@ -208,8 +214,8 @@ namespace WikiPrototypeApplication
                 {
                     ListViewItem wikiData = new ListViewItem(wikiEntry[i, 0]);
                     wikiData.SubItems.Add(wikiEntry[i, 1]);
-                    wikiData.SubItems.Add(wikiEntry[i, 2]);
-                    wikiData.SubItems.Add(wikiEntry[i, 3]);
+                    //wikiData.SubItems.Add(wikiEntry[i, 2]);
+                    //wikiData.SubItems.Add(wikiEntry[i, 3]);
 
                     dataListView.Items.Add(wikiData);
                 }
@@ -223,6 +229,7 @@ namespace WikiPrototypeApplication
             DisplayList();
         }
 
+        // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found, add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods
         private void Search()
         {
             // binary search
@@ -279,6 +286,7 @@ namespace WikiPrototypeApplication
 
         #region Buttons
 
+        // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             // do add method, clear textboxes, display array, and focus back to the name textbox
@@ -293,9 +301,9 @@ namespace WikiPrototypeApplication
             BubbleSort();
             Search();
             textSearch.Clear();
-
         }
 
+        // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             // when listview's entry is selected
@@ -314,6 +322,8 @@ namespace WikiPrototypeApplication
                 stStripArrayEmpty();
             }
         }
+
+        // 9.4	Create a DELETE button that removes all the information from a single entry of the array; the user must be prompted before the final deletion occurs
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             // when listview's entry is selected
@@ -336,7 +346,6 @@ namespace WikiPrototypeApplication
                     ButtonsRoutine();
                     selectedlistviewcount = -1;
                 }
-
             }
         }
 
@@ -348,7 +357,7 @@ namespace WikiPrototypeApplication
             stStripArrayReset();
         }
 
-
+        // 9.11	Create a LOAD button that will read the information from a binary file called definitions.dat into the 2D array, ensure the user has the option to select an alternative file. Use a file stream and BinaryReader to complete this task
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             // create open file dialog, load binary file into the wiki entry, then display array
@@ -389,10 +398,10 @@ namespace WikiPrototypeApplication
                 ptr = x;
                 DisplayList();
             }
-
             stStripArrayReset();
         }
 
+        // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name, ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file
         private void buttonSave_Click(object sender, EventArgs e)
         {
             // create save file dialog, save wiki entry to a binary file with default name "definitions.dat"
@@ -433,6 +442,5 @@ namespace WikiPrototypeApplication
         }
 
         #endregion
-
     }
 }

@@ -31,8 +31,6 @@
             this.dataListView = new System.Windows.Forms.ListView();
             this.dataName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dataCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dataStructure = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dataDefinition = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textName = new System.Windows.Forms.TextBox();
             this.textCategory = new System.Windows.Forms.TextBox();
             this.textStructure = new System.Windows.Forms.TextBox();
@@ -61,9 +59,7 @@
             // 
             this.dataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.dataName,
-            this.dataCategory,
-            this.dataStructure,
-            this.dataDefinition});
+            this.dataCategory});
             this.dataListView.HideSelection = false;
             this.dataListView.Location = new System.Drawing.Point(447, 75);
             this.dataListView.Name = "dataListView";
@@ -76,19 +72,12 @@
             // dataName
             // 
             this.dataName.Text = "Name";
+            this.dataName.Width = 150;
             // 
             // dataCategory
             // 
             this.dataCategory.Text = "Category";
-            // 
-            // dataStructure
-            // 
-            this.dataStructure.Text = "Structure";
-            // 
-            // dataDefinition
-            // 
-            this.dataDefinition.Text = "Definition";
-            this.dataDefinition.Width = 145;
+            this.dataCategory.Width = 81;
             // 
             // textName
             // 
@@ -322,8 +311,6 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.ColumnHeader dataName;
         private System.Windows.Forms.ColumnHeader dataCategory;
-        private System.Windows.Forms.ColumnHeader dataStructure;
-        private System.Windows.Forms.ColumnHeader dataDefinition;
         private System.Windows.Forms.ToolStripStatusLabel ststripWiki;
         private System.Windows.Forms.Button buttonSort;
         private System.Windows.Forms.Button buttonSearch;
