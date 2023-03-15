@@ -27,6 +27,14 @@ namespace WikiPrototypeApplication
         int selectedlistviewcount = -1;
         string[,] wikiEntry = new string[row, column];
 
+        static string Uppercase(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
 
         #region Behaviour - Everything besides buttons are clicked
         private void dataListView_MouseClick(object sender, MouseEventArgs e)
@@ -142,6 +150,7 @@ namespace WikiPrototypeApplication
                 stStripArrayEmpty();
             }
         }
+
         private void Edit()
         {
             // selected listview value is passed to the array for editing
@@ -230,13 +239,17 @@ namespace WikiPrototypeApplication
             int finalIndex = ptr;
             bool flag = false;
             int foundIndex = -1;
+
+            string searchtext = Uppercase(textSearch.Text);
+            string searchtexttest =  new System.Globalization.CultureInfo("en-US").TextInfo.ToTitleCase(textSearch.Text);
+            
             // while flag is FALSE AND the set index is less or equal to 1, keep looping until finish
             while (!flag && !((finalIndex - startIndex) <= 1))
             {
                 // do calculation for new index value to do the compare 
                 int newIndex = (finalIndex + startIndex) / 2;
                 // comparing the entry of an array at new index with text on the search textbox
-                if (string.Compare(wikiEntry[newIndex, 0], textSearch.Text) == 0)
+                if (string.Compare(wikiEntry[newIndex, 0], searchtexttest) == 0)
                 {
                     // if match, the new index value assigned to found index, turns the flag TRUE, and then break the while loop
                     foundIndex = newIndex;
@@ -246,7 +259,7 @@ namespace WikiPrototypeApplication
                 else
                 {
                     // if not match, the new index replace the pointer value of final or start index then start over with the loop
-                    if (string.Compare(wikiEntry[newIndex, 0], textSearch.Text) == 1)
+                    if (string.Compare(wikiEntry[newIndex, 0], searchtexttest) == 1)
                         finalIndex = newIndex;
                     else
                         startIndex = newIndex;
